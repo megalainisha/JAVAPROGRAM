@@ -1,0 +1,18 @@
+
+public class sample 
+{
+  static int p=10;
+  sample().
+  {
+	  p++;
+	  System.out.println(p);
+  }
+}
+class demo
+{
+	public static void main(String[] args)
+	{
+		
+	}
+
+}

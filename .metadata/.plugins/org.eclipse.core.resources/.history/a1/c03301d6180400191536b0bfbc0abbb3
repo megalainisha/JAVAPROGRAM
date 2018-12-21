@@ -1,0 +1,13 @@
+
+public class sample 
+{
+  static int p=10;
+}
+class demo
+{
+	public static void main(String[] args)
+	{
+		
+	}
+
+}

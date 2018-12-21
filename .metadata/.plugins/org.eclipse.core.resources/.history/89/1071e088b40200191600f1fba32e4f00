@@ -1,0 +1,186 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Register extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Register frame = new Register();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Register() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 749, 678);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblRegisterForm = new JLabel("REGISTER FORM");
+		lblRegisterForm.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblRegisterForm.setBounds(163, 23, 221, 31);
+		contentPane.add(lblRegisterForm);
+		
+		JLabel lblUserId = new JLabel("USER ID");
+		lblUserId.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUserId.setBounds(40, 92, 76, 16);
+		contentPane.add(lblUserId);
+		
+		textField = new JTextField();
+		textField.setBounds(151, 90, 226, 22);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblName = new JLabel("NAME");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblName.setBounds(43, 143, 56, 16);
+		contentPane.add(lblName);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(151, 141, 226, 22);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblDob = new JLabel("DOB");
+		lblDob.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDob.setBounds(43, 203, 56, 16);
+		contentPane.add(lblDob);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(151, 201, 226, 22);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblGender = new JLabel("GENDER");
+		lblGender.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGender.setBounds(40, 251, 56, 16);
+		contentPane.add(lblGender);
+		
+		JRadioButton rdbtnMale = new JRadioButton("MALE");
+		rdbtnMale.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnMale.setBounds(151, 247, 96, 25);
+		contentPane.add(rdbtnMale);
+		
+		JRadioButton rdbtnFemale = new JRadioButton("FEMALE");
+		rdbtnFemale.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnFemale.setBounds(288, 247, 173, 25);
+		contentPane.add(rdbtnFemale);
+		ButtonGroup bg=new ButtonGroup();
+		bg.add(rdbtnMale);
+		bg.add(rdbtnFemale);
+		
+		JLabel lblCity = new JLabel("CITY");
+		lblCity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCity.setBounds(40, 304, 56, 16);
+		contentPane.add(lblCity);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"DINDIGUL", "KARUR", "MADURAI", "CHENNAI", "TRICHY", "COIMBATORE"}));
+		comboBox.setBounds(149, 302, 139, 22);
+		contentPane.add(comboBox);
+		
+		JLabel lblRoom = new JLabel("ROOM");
+		lblRoom.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRoom.setBounds(40, 364, 56, 16);
+		contentPane.add(lblRoom);
+		
+		JRadioButton rdbtnAc = new JRadioButton("AC");
+		rdbtnAc.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnAc.setBounds(148, 361, 63, 25);
+		contentPane.add(rdbtnAc);
+		
+		JRadioButton rdbtnNonac = new JRadioButton("NON-AC");
+		rdbtnNonac.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnNonac.setBounds(288, 361, 127, 25);
+		contentPane.add(rdbtnNonac);
+		
+		JLabel lblPayment = new JLabel("PAYMENT");
+		lblPayment.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPayment.setBounds(40, 415, 85, 21);
+		contentPane.add(lblPayment);
+		
+		JRadioButton rdbtnCc = new JRadioButton("CC");
+		rdbtnCc.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnCc.setBounds(151, 413, 71, 25);
+		contentPane.add(rdbtnCc);
+		
+		JRadioButton rdbtnDc = new JRadioButton("DC");
+		rdbtnDc.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnDc.setBounds(250, 413, 63, 25);
+		contentPane.add(rdbtnDc);
+		
+		JRadioButton rdbtnCash = new JRadioButton("CASH");
+		rdbtnCash.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rdbtnCash.setBounds(334, 413, 76, 25);
+		contentPane.add(rdbtnCash);
+		
+		JLabel lblRoomId = new JLabel("ROOM ID");
+		lblRoomId.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRoomId.setBounds(43, 457, 73, 16);
+		contentPane.add(lblRoomId);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(144, 451, 233, 22);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JButton btnConfirm = new JButton("CONFIRM");
+		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnConfirm.setBounds(118, 530, 117, 25);
+		contentPane.add(btnConfirm);
+		
+		JButton btnCancel = new JButton("CANCEL");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCancel.setBounds(288, 531, 97, 25);
+		contentPane.add(btnCancel);
+		
+		JButton btnBack = new JButton("BACK");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e2) 
+			{
+				if(e2.getSource()==btnBack)
+				{
+					new Homepage().setVisible(true);
+				}
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBack.setBounds(536, 568, 97, 25);
+		contentPane.add(btnBack);
+	}
+}

@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -13,7 +15,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
 
 public class Register extends JFrame {
 
@@ -134,25 +140,25 @@ public class Register extends JFrame {
 		lblPayment.setBounds(40, 415, 85, 21);
 		contentPane.add(lblPayment);
 		
-		JRadioButton rdbtnCc = new JRadioButton("CC");
-		rdbtnCc.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		rdbtnCc.setBounds(151, 413, 71, 25);
-		contentPane.add(rdbtnCc);
-		
-		JRadioButton rdbtnDc = new JRadioButton("DC");
-		rdbtnDc.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		rdbtnDc.setBounds(250, 413, 63, 25);
-		contentPane.add(rdbtnDc);
-		
-		JRadioButton rdbtnCash = new JRadioButton("CASH");
-		rdbtnCash.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		rdbtnCash.setBounds(334, 413, 76, 25);
-		contentPane.add(rdbtnCash);
-		
 		JLabel lblRoomId = new JLabel("ROOM ID");
 		lblRoomId.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblRoomId.setBounds(43, 457, 73, 16);
 		contentPane.add(lblRoomId);
+		
+		JCheckBox chckbxDc = new JCheckBox("DC");
+		chckbxDc.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxDc.setBounds(151, 414, 60, 25);
+		contentPane.add(chckbxDc);
+		
+		JCheckBox chckbxCc = new JCheckBox("CC");
+		chckbxCc.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxCc.setBounds(232, 414, 76, 25);
+		contentPane.add(chckbxCc);
+		
+		JCheckBox chckbxCash = new JCheckBox("CASH");
+		chckbxCash.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		chckbxCash.setBounds(317, 414, 85, 25);
+		contentPane.add(chckbxCash);
 		
 		textField_3 = new JTextField();
 		textField_3.setBounds(144, 451, 233, 22);
@@ -160,6 +166,96 @@ public class Register extends JFrame {
 		textField_3.setColumns(10);
 		
 		JButton btnConfirm = new JButton("CONFIRM");
+		btnConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try
+				{
+					String  userid=textField.getText();
+					String name=textField.getText();
+					String dob=textField.getText();
+					String gen="";
+					String city=(String) comboBox.getSelectedItem();
+					String room="";
+					String pay1="";
+					String pay2="";
+					String pay3="";
+					String roomid=textField.getText();
+					
+					if(rdbtnMale.isSelected())
+					{
+						gen="MALE";
+					}
+					else
+					{
+						gen="FEMALE";
+					}
+					
+					if(rdbtnAc.isSelected())
+					{
+						room="AC";
+					}
+					else
+					{
+						room="NONAC";
+					}
+					
+					if(chckbxDc.isSelected()&&chckbxCc.isSelected()&&chckbxCash.isSelected())
+					{
+						pay1="DC";
+						pay2="CC";
+						pay3="CASH";
+					}
+					else if(chckbxDc.isSelected()&&chckbxCc.isSelected())
+					{
+						pay1="DC";
+						pay2="CC";
+						pay3="NULL";
+					}
+					else if(chckbxDc.isSelected()&&chckbxCash.isSelected())
+					{
+					    pay1="DC";
+					    pay2="NULL";
+					    pay3="CASH";
+					}
+					else if(chckbxCc.isSelected()&&chckbxCash.isSelected())
+					{
+						pay1="NULL";
+						pay2="CC";
+						pay3="CASH";
+					}
+					else if(chckbxDc.isSelected())
+					{
+						pay1="DC";
+						pay2="NULL";
+						pay3="NULL";
+					}
+					else if(chckbxCc.isSelected())
+					{
+						pay1="NULL";
+						pay2="CC";
+						pay3="NULL";
+					}
+					else if(chckbxCash.isSelected())
+					{
+						pay1="NULL";
+						pay2="NULL";
+						pay3="CASH";
+					}
+
+                    String str="insert into reg values('"+userid+"','"+name+"','"+dob+"','"+gen+"','"+city+"','"+room+"','"+pay1+"','"+pay2+"','"+pay3+"','"+roomid+"')";
+                    Class.forName("org.h2.Driver");
+                    Connection con=DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test","sa","");
+                    Statement st=con.createStatement();
+                    st.executeUpdate(str);
+                    JOptionPane.showMessageDialog(btnConfirm, "Inserted...");
+				}
+				catch(Exception r)
+				{
+					System.out.println(r);
+				}
+			}
+		});
 		btnConfirm.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnConfirm.setBounds(118, 530, 117, 25);
 		contentPane.add(btnConfirm);
@@ -182,5 +278,7 @@ public class Register extends JFrame {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnBack.setBounds(536, 568, 97, 25);
 		contentPane.add(btnBack);
+		
+	
 	}
 }

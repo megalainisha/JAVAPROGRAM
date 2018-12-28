@@ -81,7 +81,7 @@ public class Hotel extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnEdit.setBounds(308, 95, 97, 25);
+		btnEdit.setBounds(221, 153, 97, 25);
 		contentPane.add(btnEdit);
 		
 		JButton btnUpdate = new JButton("UPDATE");
@@ -94,8 +94,12 @@ public class Hotel extends JFrame {
 		contentPane.add(btnUpdate);
 		
 		JButton btnAdmin = new JButton("ADMIN");
+		btnAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnAdmin.setBounds(214, 153, 97, 25);
+		btnAdmin.setBounds(304, 94, 97, 25);
 		contentPane.add(btnAdmin);
 	}
 }

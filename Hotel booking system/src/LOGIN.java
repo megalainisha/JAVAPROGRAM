@@ -1,13 +1,24 @@
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.awt.event.ActionEvent;
 
 public class LOGIN extends JFrame {
 
@@ -15,6 +26,7 @@ public class LOGIN extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	
 
 	/**
 	 * Launch the application.
@@ -35,8 +47,18 @@ public class LOGIN extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
+	 public void close()
+	   {
+		    
+		    WindowEvent win=new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+		        
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(win);
+		    
+		}
+	
 	public LOGIN() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,10 +95,51 @@ public class LOGIN extends JFrame {
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
-		JButton btnNewButton = new JButton("LOGIN\r\n");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(85, 191, 97, 25);
-		contentPane.add(btnNewButton);
+		//final JButton btnNewButton =new JButton("Login");
+		JButton btnNewButton1 = new JButton("LOGIN\r\n");
+		btnNewButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				try
+				{
+				String e=textField_1.getText();
+				String p=textField_2.getText();
+			
+				String str="select * from loginpage where EMAIL='"+e+"' AND PASS='"+p+"'";
+				 
+				Class.forName("org.h2.Driver");
+				Connection c=DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test","sa","");
+				Statement st=c.createStatement();
+				ResultSet rs=st.executeQuery(str);
+				rs.next();
+				String email=rs.getString(1);
+				String pass=rs.getString(2);
+				
+				//System.out.println(rs.getString(1)+""+rs.getString(2));
+				
+				
+				
+				if(e.equals(email)&&p.equals(pass))
+				{
+					JOptionPane.showMessageDialog(btnNewButton1,"login success...");
+					new Admin().setVisible(true);
+					close();
+				}
+				/*if(arg0.getSource()==btnNewButton1)
+				{
+					new Admin().setVisible(true);
+					close();
+				}*/
+				}
+				catch(Exception r)
+				{
+					System.out.println("login fail");
+				}
+			}
+		});
+		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton1.setBounds(85, 191, 97, 25);
+		contentPane.add(btnNewButton1);
 		
 		JButton btnNewButton_1 = new JButton("RESET");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));

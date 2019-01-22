@@ -5,10 +5,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Toolkit;
+
+import javax.swing.border.CompoundBorder;
+import java.awt.Color;
 
 public class Hotel extends JFrame {
 
@@ -33,73 +39,93 @@ public class Hotel extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	 public void close()
+	   {
+		    
+		    WindowEvent win=new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+		        
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(win);
+		    
+		}
+	
 	public Hotel() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 865, 579);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(new CompoundBorder());
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblHomepage = new JLabel("HOMEPAGE");
-		lblHomepage.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblHomepage.setBounds(136, 38, 86, 16);
+		JLabel lblHomepage = new JLabel("RADDISSON BLU");
+		lblHomepage.setFont(new Font("Bookman Old Style", Font.BOLD, 35));
+		lblHomepage.setBounds(248, 34, 313, 43);
 		contentPane.add(lblHomepage);
 		
 		JButton btnLogin = new JButton("LOGIN");
-		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnLogin.setBackground(Color.WHITE);
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				if(e.getSource()==btnLogin)
 				{
-					new LOGIN().setVisible(true);
-					
+					new Login().setVisible(true);
+					close();
 				}
 			}
 		});
-		btnLogin.setBounds(12, 94, 97, 25);
+		btnLogin.setBounds(199, 181, 143, 43);
 		contentPane.add(btnLogin);
 		
-		JButton btnRegister = new JButton("REGISTER");
-		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JButton btnRegister = new JButton("REGISTER CUSTOMER DETAILS");
+		btnRegister.setBackground(Color.WHITE);
+		btnRegister.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e1) 
 			{
 				if(e1.getSource()==btnRegister)
 				{
-					new Register().setVisible(true);
+					new RegisterCustomerDetails().setVisible(true);
+					close();
 				}
 			}
 		});
-		btnRegister.setBounds(146, 94, 121, 25);
+		btnRegister.setBounds(219, 278, 373, 65);
 		contentPane.add(btnRegister);
 		
-		JButton btnEdit = new JButton("EDIT");
-		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JButton btnEdit = new JButton("REGISTER STAFF DETAILS");
+		btnEdit.setBackground(Color.WHITE);
+		btnEdit.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(arg0.getSource()==btnEdit)
+				{
+					new RegisterStaffDetails().setVisible(true);
+					close();
+				}
 			}
 		});
-		btnEdit.setBounds(221, 153, 97, 25);
+		btnEdit.setBounds(225, 410, 373, 58);
 		contentPane.add(btnEdit);
 		
-		JButton btnUpdate = new JButton("UPDATE");
-		btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnUpdate.setBounds(74, 153, 97, 25);
-		contentPane.add(btnUpdate);
-		
-		JButton btnAdmin = new JButton("ADMIN");
+		JButton btnAdmin = new JButton("ADMIN PAGE");
+		btnAdmin.setBackground(Color.WHITE);
 		btnAdmin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				JOptionPane.showMessageDialog(btnAdmin, "Login to open the page");
+				close();
 			}
 		});
-		btnAdmin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnAdmin.setBounds(304, 94, 97, 25);
+		btnAdmin.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnAdmin.setBounds(448, 181, 165, 43);
 		contentPane.add(btnAdmin);
+		
+		JLabel lblLiveInThe = new JLabel("LIVE IN THE HEAVEN......");
+		lblLiveInThe.setFont(new Font("Times New Roman", Font.ITALIC, 18));
+		lblLiveInThe.setBounds(556, 68, 214, 36);
+		contentPane.add(lblLiveInThe);
 	}
 }
